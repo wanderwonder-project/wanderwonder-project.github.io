@@ -31,7 +31,8 @@
   --bg: #fff;
 
   /* Type scale */
-  --type-logo: 30pt;
+  --type-logo-max: 30pt;
+  --type-logo: clamp(0.9rem, 0.65rem + 1.6vw, var(--type-logo-max));
   --type-sub-title: 22pt;
   --type-nav: 18pt;
   --type-body: 12.25pt;
@@ -147,7 +148,9 @@ a.link-dotted:hover,
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
+  container-type: inline-size;
+  container-name: col-left;
 }
 
 .col-left-header {
@@ -158,6 +161,10 @@ a.link-dotted:hover,
   position: relative;
   z-index: 30;
   pointer-events: auto;
+  overflow: visible;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .col-left-body {
@@ -171,16 +178,20 @@ a.link-dotted:hover,
 
 .logo {
   font-size: var(--type-logo);
+  font-size: clamp(0.85rem, 7.5cqi, var(--type-logo-max));
   font-weight: 400;
   letter-spacing: var(--tracking-tight);
-  line-height: 1;
+  line-height: 1.05;
   text-decoration: none;
   margin: 0;
   white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
   position: relative;
   z-index: 30;
   pointer-events: auto;
   cursor: pointer;
+  overflow: visible;
 }
 
 .sub-title {
@@ -1044,6 +1055,21 @@ body.page-routes {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --type-logo: clamp(1rem, 0.85rem + 1.2vw, 1.65rem);
+  }
+
+  .logo {
+    font-size: var(--type-logo);
+    font-size: clamp(1rem, 6.5cqi, var(--type-logo-max));
+    max-width: min(100%, calc(100vw - 2rem));
+  }
+
+  .col-header {
+    height: auto;
+    min-height: var(--col-header-zone);
+  }
+
   .page--overview {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
@@ -1121,6 +1147,16 @@ body.page-routes {
 
   .page-arrows__right {
     grid-column: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: clamp(0.9rem, 6cqi, 1.35rem);
+  }
+
+  .page {
+    padding-inline: 0.75rem;
   }
 }
 
