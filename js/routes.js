@@ -18,6 +18,7 @@
   };
 
   const PROJECT_ROOTS = [
+    "wanderwonder-project.github.io",
     "wanderwonder18.06",
     "260625_wanderwonder",
     "wanderwonder",

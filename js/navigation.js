@@ -5,6 +5,7 @@
   let navigating = false;
 
   const PROJECT_ROOTS = [
+    "wanderwonder-project.github.io",
     "wanderwonder18.06",
     "260625_wanderwonder",
     "wanderwonder",
@@ -43,12 +44,7 @@
       }
     }
 
-    const key = pageKey(pageUrl);
-    const pageName = key.split("/").pop() || "index.html";
-    const pagePath = u.pathname.endsWith("/")
-      ? u.pathname
-      : u.pathname.slice(0, u.pathname.lastIndexOf("/") + 1);
-    return `${u.origin}${pagePath || "/"}`;
+    return `${u.origin}/`;
   }
 
   function homeUrl(pageUrl = location.href) {
