@@ -51,7 +51,7 @@
   --arrow-zone: 2.5rem;
   --meta-tab-gap: 1rem;
   --line-body: 1.3;
-  --line-meta: 1.2;
+  --line-meta: 1.3;
   --line-interview-info: 1.15;
   --scroll-fade-size: 3.5rem;
 
@@ -257,7 +257,6 @@ a.link-dotted:hover,
   position: relative;
   padding-left: 2.7rem;
   margin-bottom: 0.6rem;
-  line-height: 1.2;
 }
 
 .conversations-marker {
@@ -279,11 +278,7 @@ a.link-dotted:hover,
 }
 
 .conversations-item a:not(.conversations-marker) {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
   font-size: var(--type-nav);
-  line-height: 1;
 }
 
 .conversations-desc {
@@ -377,7 +372,11 @@ a.link-dotted:hover,
   line-height: var(--line-interview-info);
   font-weight: 400;
   letter-spacing: 0.005em;
-  //opacity: 0.5;
+  /* opacity: 0.5; */
+}
+
+.interview-info .interview-info__interviewee {
+  display: none;
 }
 
 .interview-info__row {
@@ -447,14 +446,11 @@ a.link-dotted:hover,
 .transcript .question {
   font-style: italic;
   margin-bottom: 0.5rem;
-  margin-left: 3.5rem;
+  margin-left: 4.5rem;
 }
 
 .transcript .answer {
-  position: relative;
   margin-bottom: 1.5rem;
-  padding-left: 0;
-  text-indent: 3.5rem;
 }
 
 .transcript .answer:has(+ .answer-continue) {
@@ -462,10 +458,8 @@ a.link-dotted:hover,
 }
 
 .transcript .answer-continue {
-  position: relative;
   margin: 0 0 1.5rem;
-  padding-left: 0;
-  text-indent: 3.5rem;
+  text-indent: 4.5rem;
 }
 
 .transcript .answer-continue:has(+ .answer-continue) {
@@ -473,13 +467,9 @@ a.link-dotted:hover,
 }
 
 .transcript .speaker {
-  position: absolute;
-  left: 0;
-  display: inline-block;
-  width: 3rem;
-  margin-right: 0;
   font-style: normal;
   font-weight: 400;
+  margin-right: 3.4rem;
 }
 
 .route-meta .location {
@@ -1149,6 +1139,10 @@ body.page-routes {
     overflow: visible;
   }
 
+  .page.page-interview {
+    padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+
   .col-left,
   .col-center-panel,
   .col-right,
@@ -1170,6 +1164,10 @@ body.page-routes {
   .col-left-body {
     padding-top: 1rem;
     padding-bottom: 0.75rem;
+  }
+
+  .page-interview .col-left-body {
+    display: none;
   }
 
   /* Restore the original mobile hierarchy: title / person names match the Rob Van Leijsen scale; supporting copy stays smaller. */
@@ -1204,6 +1202,10 @@ body.page-routes {
   .conversations-desc {
     font-size: var(--type-meta);
     line-height: var(--line-meta);
+  }
+
+  .page--overview .route-intro br {
+    display: none;
   }
 
   .route-meta {
@@ -1277,6 +1279,10 @@ body.page-routes {
     background: transparent;
   }
 
+  .interview-info .interview-info__interviewee {
+    display: contents;
+  }
+
   .interview-info,
   .interview-meta {
     min-height: 0;
@@ -1318,6 +1324,7 @@ body.page-routes {
 
   .transcript .answer,
   .transcript .answer-continue {
+    position: relative;
     margin-left: 0;
   }
 
@@ -1655,6 +1662,32 @@ body.page-routes {
   }
 }
 
+@media (min-width: 901px) {
+  .page--overview .col-left-body .route-intro,
+  .page--overview .col-left-body .route-meta,
+  .page--overview .col-left-body .conversations-desc,
+  .page-interview .col-left-body .route-intro,
+  .page-interview .col-left-body .route-meta,
+  .page-interview .col-left-body .conversations-desc {
+    font-size: var(--type-body);
+    line-height: var(--line-body);
+  }
+
+  .page-interview .col-left {
+    position: fixed;
+    top: 0;
+    left: calc(var(--layout-margin) / var(--layout-total) * 100vw);
+    width: calc(
+      315 / 1764 * (
+        100vw -
+        2 * calc(var(--layout-margin) / var(--layout-total) * 100vw) -
+        2 * calc(var(--layout-gutter) / var(--layout-total) * 100vw)
+      )
+    );
+    height: 100vh;
+  }
+}
+
 /* Narrow phones: slightly tighter chrome */
 @media (max-width: 480px) {
   :root {
@@ -1665,6 +1698,10 @@ body.page-routes {
   }
 
   .page {
+    padding-inline: max(1rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+
+  .page.page-interview {
     padding-inline: max(1rem, env(safe-area-inset-left), env(safe-area-inset-right));
   }
 
