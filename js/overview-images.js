@@ -77,9 +77,59 @@
   const prefetched = new Set();
   const preloadCache = new Map();
 
+  function creditForSrc(src) {
+    const path = String(src || "").replace(/\\/g, "/");
+    const file = path.split("/").pop() || "";
+    const lower = path.toLowerCase();
+
+    const byFile = {
+      "Basel_01.jpg": "ⓒVíctor Martin Castro",
+      "Basel_02.jpg": "ⓒVíctor Martin Castro",
+      "Basel_03.jpeg": "ⓒJeonghyeon Kong",
+      "Basel_04.jpeg": "ⓒJeonghyeon Kong",
+      "Basel_05.jpeg": "ⓒJeonghyeon Kong",
+      "Basel_06.jpeg": "ⓒJeonghyeon Kong",
+      "Basel_07.jpeg": "ⓒJeonghyeon Kong",
+      "Basel_08.jpeg": "ⓒVíctor Martin Castro, Antonina Alekseeva",
+      "Basel_09.jpg": "ⓒSohee Ryan",
+      "Basel_10.jpeg": "ⓒVíctor Martin Castro",
+      "rietveld_01.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_02.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_03.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_04.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_05.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_07.jpg": "ⓒGerrit Rietveld Academie students",
+      "rietveld_08.jpg": "ⓒHabitat",
+      "Velko (3) 2.jpeg": "ⓒVelko Kalchev",
+      "Habitat_1.JPG": "ⓒHabitat",
+      "habitat_02.jpg": "ⓒHabitat",
+      "Habitat_03.jpg": "ⓒHabitat",
+    };
+
+    if (byFile[file]) return byFile[file];
+
+    if (lower.includes("/habitat/") || /habitat/i.test(file)) return "ⓒHabitat";
+    if (lower.includes("/velko/") || /velko/i.test(file)) return "ⓒVelko Kalchev";
+    if (lower.includes("eka(ig)")) return "ⓒEKA students";
+    if (/eka_archil/i.test(file) || lower.includes("archil")) return "ⓒArchil Tsereteli";
+    if (lower.includes("/zhuang/") || lower.includes("/dai/")) return "ⓒZhang Leng";
+    if (lower.includes("umprum") || lower.includes("head geneva")) {
+      return "ⓒUMPRUM & HEAD Geneve students";
+    }
+    if (lower.includes("rietveld")) return "ⓒGerrit Rietveld Academie students";
+    if (lower.includes("basel")) return "ⓒJeonghyeon Kong";
+    return "";
+  }
+
   function parseImageEntry(item) {
-    if (typeof item === "string") return { src: item, scale: null };
-    return { src: item.src, scale: item.scale ?? null };
+    if (typeof item === "string") {
+      return { src: item, scale: null, credit: creditForSrc(item) };
+    }
+    return {
+      src: item.src,
+      scale: item.scale ?? null,
+      credit: item.credit || creditForSrc(item.src),
+    };
   }
 
   function assetRoot(pageUrl = location.href) {

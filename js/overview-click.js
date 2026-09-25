@@ -21,6 +21,58 @@
   const selectedSet = getSetForBody(document.body);
   const imageEntries = selectedSet.map(parseImageEntry);
   const images = imageEntries.map((entry) => assetRootPath + entry.src);
+  const isMobileOverview = window.matchMedia("(max-width: 900px)").matches;
+
+  function initMobileGallery() {
+    const main = document.querySelector(".overview-main");
+    if (!main || !images.length) return;
+
+    layer.hidden = true;
+    layer.replaceChildren();
+
+    const gallery = document.createElement("div");
+    gallery.className = "overview-mobile-gallery";
+    gallery.setAttribute("role", "region");
+    gallery.setAttribute("aria-label", "Photo gallery");
+
+    const total = images.length;
+
+    images.forEach((src, index) => {
+      const figure = document.createElement("figure");
+      figure.className = "overview-mobile-slide";
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      img.decoding = "async";
+      img.draggable = false;
+      preloadImage(src).catch(() => {});
+
+      const meta = document.createElement("div");
+      meta.className = "overview-mobile-meta";
+
+      const credit = document.createElement("figcaption");
+      credit.className = "overview-mobile-credit";
+      credit.textContent = imageEntries[index].credit || "";
+
+      const count = document.createElement("span");
+      count.className = "overview-mobile-count";
+      count.textContent = `${index + 1}/${total}`;
+
+      meta.appendChild(credit);
+      meta.appendChild(count);
+      figure.appendChild(img);
+      figure.appendChild(meta);
+      gallery.appendChild(figure);
+    });
+
+    main.appendChild(gallery);
+  }
+
+  if (isMobileOverview) {
+    initMobileGallery();
+    return;
+  }
 
   const sizeRange = (() => {
     if (isBaselOverview) {

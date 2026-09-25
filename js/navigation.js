@@ -117,6 +117,10 @@
       window.__wwDotsCleanup();
       window.__wwDotsCleanup = null;
     }
+    if (typeof window.__wwScrollFadeCleanup === "function") {
+      window.__wwScrollFadeCleanup();
+      window.__wwScrollFadeCleanup = null;
+    }
     document
       .querySelectorAll('script[data-ww-page="true"]')
       .forEach((node) => node.remove());
@@ -256,6 +260,14 @@
 
     const dot = event.target.closest(".dot--trigger[data-href]");
     if (dot) {
+      /* Touch: first tap opens preview; only a tap on the photo navigates */
+      if (
+        window.matchMedia("(hover: none)").matches &&
+        (!dot.classList.contains("is-open") || !event.target.closest(".dot-preview"))
+      ) {
+        return;
+      }
+
       event.preventDefault();
       prefetchOverviewFromTarget(dot);
       navigateTo(dot.dataset.href);
