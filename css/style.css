@@ -1112,6 +1112,10 @@ body.page-routes {
     --col-header-zone: calc(var(--space-top) + var(--type-logo) + var(--space-header-body));
     --arrow-zone: 2.75rem;
     --meta-tab-gap: 0.75rem;
+    --interview-label-width: 3.5rem;
+    --interview-value-indent: calc(
+      var(--interview-label-width) + var(--meta-tab-gap)
+    );
     --scroll-fade-size: 2.75rem;
   }
 
@@ -1290,7 +1294,7 @@ body.page-routes {
     max-width: 100%;
     margin-top: var(--space-s);
     margin-bottom: var(--space-l);
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: var(--interview-label-width) 1fr;
   }
 
   .interview-info dd,
@@ -1318,7 +1322,7 @@ body.page-routes {
 
   /* Reading measure + interview indents */
   .transcript .question {
-    margin-left: 3.5rem;
+    margin-left: var(--interview-value-indent);
     text-indent: 0;
   }
 
@@ -1329,11 +1333,11 @@ body.page-routes {
   }
 
   .transcript .answer {
-    text-indent: 3.5rem;
+    text-indent: var(--interview-value-indent);
   }
 
   .transcript .answer-continue {
-    text-indent: 3.5rem;
+    text-indent: var(--interview-value-indent);
   }
 
   .transcript .answer-continue {
