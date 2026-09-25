@@ -12,8 +12,8 @@
     el,
     x: parseFloat(el.style.left),
     y: parseFloat(el.style.top),
-    vx: (Math.random() - 0.5) * 0.006,
-    vy: (Math.random() - 0.5) * 0.006,
+    vx: (Math.random() - 0.5) * 0.012,
+    vy: (Math.random() - 0.5) * 0.012,
     phase: Math.random() * Math.PI * 2,
     paused: false,
     isHollow: el.classList.contains("dot--hollow"),
@@ -330,7 +330,7 @@
     document.addEventListener("click", onDocumentClick);
   }
 
-  const maxSpeed = 0.012;
+  const maxSpeed = 0.024;
   const hollowFleeSpeed = 0.13;
   const touchHollowFleeSpeed = 0.22;
   const dotRadiusPx = 6;
