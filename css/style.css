@@ -548,7 +548,9 @@ a.link-dotted:hover,
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  transition: width 0.28s ease, max-width 0.28s ease;
+  transition:
+    width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    max-width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .gallery-item--portrait {
@@ -584,10 +586,10 @@ a.link-dotted:hover,
   max-height: 0;
   overflow: hidden;
   transition:
-    opacity 0.4s ease,
-    max-height 0.4s ease,
-    padding 0.4s ease,
-    visibility 0.4s ease;
+    opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    max-height 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    padding 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .gallery-item:not(.gallery-item--portrait).is-expanded {
@@ -1607,6 +1609,10 @@ body.page-routes {
   }
 
   /* Gallery: horizontal wrap under transcript */
+  .page-interview .col-right-scroll {
+    display: none;
+  }
+
   .col-right {
     min-height: 0;
     padding-bottom: calc(var(--space-bottom) + var(--arrow-zone));

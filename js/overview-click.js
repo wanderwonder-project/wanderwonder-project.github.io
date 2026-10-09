@@ -76,15 +76,15 @@
 
   const sizeRange = (() => {
     if (isBaselOverview) {
-      return { min: 0.72, max: 1.15, baseMax: 310, baseVw: 0.28 };
+      return { min: 0.83, max: 1.04, baseMax: 310, baseVw: 0.28 };
     }
     if (isUmprumOverview) {
-      return { min: 0.7, max: 1.05, baseMax: 290, baseVw: 0.26 };
+      return { min: 0.79, max: 0.96, baseMax: 290, baseVw: 0.26 };
     }
     if (isEkaOverview || isDaiOverview) {
-      return { min: 0.6, max: 1.0, baseMax: 280, baseVw: 0.25 };
+      return { min: 0.7, max: 0.9, baseMax: 280, baseVw: 0.25 };
     }
-    return { min: 0.65, max: 1.15, baseMax: 280, baseVw: 0.25 };
+    return { min: 0.78, max: 1.03, baseMax: 280, baseVw: 0.25 };
   })();
   const MIN_VISIBLE = 0.72;
   const MIN_DISPLAY_HEIGHT = 150;

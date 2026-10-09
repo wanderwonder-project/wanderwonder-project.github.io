@@ -330,6 +330,9 @@
     document.addEventListener("click", onDocumentClick);
   }
 
+  const desktopMotionScale = window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ? 0.4
+    : 1;
   const maxSpeed = 0.024;
   const hollowFleeSpeed = 0.13;
   const touchHollowFleeSpeed = 0.22;
@@ -494,8 +497,8 @@
         dot.vy *= 0.985;
       }
 
-      dot.x += dot.vx;
-      dot.y += dot.vy;
+      dot.x += dot.vx * desktopMotionScale;
+      dot.y += dot.vy * desktopMotionScale;
 
       if (dot.x < 1 || dot.x > 99) dot.vx *= -1;
       if (dot.y < 1 || dot.y > 99) dot.vy *= -1;
