@@ -112,7 +112,7 @@
     if (lower.includes("/velko/") || /velko/i.test(file)) return "ⓒVelko Kalchev";
     if (lower.includes("eka(ig)")) return "ⓒEKA students";
     if (/eka_archil/i.test(file) || lower.includes("archil")) return "ⓒArchil Tsereteli";
-    if (lower.includes("/zhuang/") || lower.includes("/dai/")) return "ⓒZhang Leng";
+    if (lower.includes("/zhuang/") || lower.includes("/dai/")) return "ⓒZhuang Leng";
     if (lower.includes("umprum") || lower.includes("head geneva")) {
       return "ⓒUMPRUM & HEAD Geneve students";
     }
