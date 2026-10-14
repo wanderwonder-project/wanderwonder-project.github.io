@@ -333,7 +333,7 @@
   const desktopMotionScale =
     document.body.classList.contains("page-home") &&
     window.matchMedia("(hover: hover) and (pointer: fine)").matches
-      ? 0.2
+      ? 0.35
     : 1;
   const maxSpeed = 0.024;
   const hollowFleeSpeed = 0.13;
